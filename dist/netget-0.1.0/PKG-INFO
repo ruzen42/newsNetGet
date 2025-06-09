@@ -1,0 +1,16 @@
+Metadata-Version: 2.3
+Name: netget
+Version: 0.1.0
+Summary: simple parser for news for my telegram channel
+License: BSD-3
+Author: ruzen42
+Requires-Python: >=3.12
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: beautifulsoup4
+Requires-Dist: requests (>=2.32.4,<3.0.0)
+Description-Content-Type: text/markdown
+
+
