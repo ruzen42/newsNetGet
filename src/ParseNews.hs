@@ -13,7 +13,7 @@ import qualified Data.Text.Encoding as TE
 parseNews :: String -> String -> IO String
 parseNews query website = do
   response <- runReq defaultHttpConfig $ do
-    let url = https (T.pack website :: Text) /: ("ru" :: Text) /: ("search" :: Text)
+    let url = https (T.pack website :: Text) 
         params = ("q" :: Text) =: T.pack query
     req GET url NoReqBody bsResponse params
   

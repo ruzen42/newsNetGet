@@ -1,4 +1,4 @@
-module Main (main) where
+module Main where
 
 main :: IO ()
 main = putStrLn "Test suite not yet implemented."
