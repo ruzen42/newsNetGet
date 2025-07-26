@@ -1,8 +1,9 @@
 module Main where
 
-import ParseNews 
+import ParseNews (parseNews)
+import Options.Applicative
 
 main :: IO ()
 main = do
-  news <- ParseNews.parseNews "Haskell"
+  news <- parseNews "Haskell"
   putStrLn news

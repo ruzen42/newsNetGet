@@ -5,14 +5,10 @@ module ParseNews (parseNews) where
 import Network.HTTP.Req
 import Text.XML.HXT.Core
 import Text.XML.HXT.CSS
-import Control.Monad.IO.Class (liftIO)
 import qualified Data.ByteString as BS
-import qualified Data.ByteString.Lazy as LBS
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
-import qualified Data.Text.Lazy as TL
-import qualified Data.Text.Lazy.Encoding as TLE
 
 parseNews :: String -> IO String
 parseNews query = do
