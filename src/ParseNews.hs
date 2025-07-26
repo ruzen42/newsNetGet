@@ -19,7 +19,7 @@ parseNews query website = do
     let (domain, paths) = parseWebsiteName website
 
     let url = constructUrlPath (https domain) paths 
-        params = ("" :: Text) =: T.pack query
+        params = (T.pack query) =: T.pack query
     req GET url NoReqBody bsResponse params
   
   let htmlContent = responseBody response
@@ -41,7 +41,7 @@ parseNews query website = do
       "News found for your query:\n\n" ++
       unlines (map formatItem items)
       where
-        formatItem (link, title) = "**Title** " ++ title ++ "\n\n  " ++ link
+        formatItem (link, title) = "**Title** " ++ title ++ ".\n " ++ link ++ "\n"
     parseWebsiteName :: String -> (Text, [Text])
     parseWebsiteName urlString = (T.pack domain, map T.pack pathSegments) 
       where 
