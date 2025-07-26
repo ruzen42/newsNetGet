@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
 
 module ParseNews (parseNews) where 
 
@@ -9,12 +10,16 @@ import qualified Data.ByteString as BS
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
+import Data.List.Split (splitOn)
 
 parseNews :: String -> String -> IO String
 parseNews query website = do
+  putStrLn "Starting..."
   response <- runReq defaultHttpConfig $ do
-    let url = https (T.pack website :: Text) 
-        params = ("q" :: Text) =: T.pack query
+    let (domain, paths) = parseWebsiteName website
+
+    let url = constructUrlPath (https domain) paths 
+        params = ("" :: Text) =: T.pack query
     req GET url NoReqBody bsResponse params
   
   let htmlContent = responseBody response
@@ -36,5 +41,16 @@ parseNews query website = do
       "News found for your query:\n\n" ++
       unlines (map formatItem items)
       where
-        formatItem (link, title) = "* " ++ title ++ "\n  " ++ link
+        formatItem (link, title) = "**Title** " ++ title ++ "\n\n  " ++ link
+    parseWebsiteName :: String -> (Text, [Text])
+    parseWebsiteName urlString = (T.pack domain, map T.pack pathSegments) 
+      where 
+        parts = splitOn "/" urlString
+        domain = head parts
+        pathSegments = tail parts 
 
+    constructUrlPath :: Url 'Https -> [Text] -> Url 'Https
+    constructUrlPath initialUrl [] = initialUrl
+    constructUrlPath initialUrl (p:ps) = foldl (/:) (initialUrl /: p) ps
+
+        

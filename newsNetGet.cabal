@@ -21,6 +21,7 @@ library
                     , text
                     , hxt
                     , hxt-css
+                    , split >=0.2.5
                     , req
     hs-source-dirs:   src
     default-language: GHC2021
@@ -44,4 +45,5 @@ test-suite newsNetGet-test
     main-is:          Main.hs
     build-depends:
         base ^>=4.18.2.1
+      , text
       , newsNetGet
