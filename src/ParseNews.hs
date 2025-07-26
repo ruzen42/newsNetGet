@@ -33,7 +33,7 @@ parseNews query website = do
       readString [withParseHTML yes, withWarnings no] (T.unpack $ TE.decodeUtf8 html)
       >>> css ("h2.tm-title > a" :: String)
       >>> (getAttrValue0 "href" &&& deep getText)
-      >>> arr (\(href, title) -> (website ++ href, title))
+      >>> arr (\(href, title) -> (getHost (parseWebsiteName website) ++ href, title))
 
     formatNews :: [(String, String)] -> String
     formatNews [] = "No news found for your query."
@@ -48,6 +48,8 @@ parseNews query website = do
         parts = splitOn "/" urlString
         domain = head parts
         pathSegments = tail parts 
+    getHost :: (Text, [Text]) -> String 
+    getHost (name, [_]) = T.unpack name 
 
     constructUrlPath :: Url 'Https -> [Text] -> Url 'Https
     constructUrlPath initialUrl [] = initialUrl
