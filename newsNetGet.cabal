@@ -1,0 +1,51 @@
+cabal-version:      3.0
+name:               newsNetGet
+version:            0.1.0.0
+-- synopsis:
+-- description:
+homepage:           https://github.com/ruzen42/newsNetGet
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             ruzen42
+maintainer:         malledeferlive@gmail.com
+-- copyright:
+category:           Network
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  MyLib
+    -- other-modules:
+    -- other-extensions:
+    build-depends:    base ^>=4.18.2.1
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+executable newsNetGet
+    import:           warnings
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.18.2.1,
+        newsNetGet
+
+    hs-source-dirs:   app
+    default-language: GHC2021
+
+test-suite newsNetGet-test
+    import:           warnings
+    default-language: GHC2021
+    -- other-modules:
+    -- other-extensions:
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.18.2.1,
+        newsNetGet
