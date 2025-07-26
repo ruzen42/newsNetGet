@@ -1,8 +1,8 @@
 module Main where
 
-import qualified MyLib (someFunc)
+import ParseNews 
 
 main :: IO ()
 main = do
-  putStrLn "Hello, Haskell!"
-  MyLib.someFunc
+  news <- ParseNews.parseNews "Haskell"
+  putStrLn news
