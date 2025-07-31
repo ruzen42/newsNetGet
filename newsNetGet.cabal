@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               newsNetGet
-version:            0.1.0.0
+version:            0.1.1.0
 homepage:           https://github.com/ruzen42/newsNetGet
 license:            BSD-3-Clause
 license-file:       LICENSE
@@ -16,12 +16,12 @@ common warnings
 library
     import:           warnings
     exposed-modules:  ParseNews
-    build-depends:    base ^>=4.18.2.1
+    build-depends:    base 
                     , bytestring 
                     , text
                     , hxt
                     , hxt-css
-                    , split >=0.2.5
+                    , split
                     , req
     hs-source-dirs:   src
     default-language: GHC2021
@@ -30,7 +30,7 @@ executable newsParseGet
     import:           warnings
     main-is:          Main.hs
     build-depends:
-        base ^>=4.18.2.1
+        base
       , optparse-applicative
       , newsNetGet
 
@@ -44,6 +44,6 @@ test-suite newsNetGet-test
     hs-source-dirs:   test
     main-is:          Main.hs
     build-depends:
-        base ^>=4.18.2.1
+        base 
       , text
       , newsNetGet
